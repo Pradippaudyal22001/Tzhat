@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="apple-touch-icon" sizes="180x180" th:href="@{img/favicon_io/apple-touch-icon.png}">
+	<link rel="icon" type="image/png" sizes="32x32" th:href="@{img/favicon_io/favicon-32x32.png}">
+	<link rel="icon" type="image/png" sizes="16x16" th:href="@{img/favicon_io/favicon-16x16.png}">
+	<link rel="manifest" th:href="@{img/favicon_io/site.webmanifest}">
+	<title>T.Zhat</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" th:href="@{css/home.css}">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg sticky-top" style="background-color: #e3f2fd;">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="home">
+				<img th:src="@{img/siteLogo.jpg}"
+					style="width: 40px;height: 40px;object-fit: scale-down;border-radius: .25rem;vertical-align: bottom;">
+				<span>T.Zhat</span>
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+				aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
+				<div class="d-flex" role="search">
+					<ul class="navbar-nav me-auto my-2 my-lg-0" style="--bs-scroll-height: 100px;">
+						<li class="nav-item dropdown dropstart ">
+							<a class="nav-link d-none d-lg-block" href="#" role="button" id="navbarDropdown"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-gear"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item link-hv" href="profile">Profile</a></li>
+								<li><a class="dropdown-item link-hv" href="changepwd">ChangePassword</a></li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<li><a class="dropdown-item link-hv" data-bs-toggle="modal"
+										data-bs-target="#exampleModal">LogOut</a></li>
+							</ul>
+						</li>
+						<li class="nav-item d-lg-none">
+							<a class="nav-link d-block text-secondary-emphasis" href="profile"
+								style=" padding: 8px 16px; border-radius: 5px;">Profile</a>
+						</li>
+						<li class="nav-item d-lg-none">
+							<a class="nav-link d-block text-secondary-emphasis" href="changepwd"
+								style=" padding: 8px 16px; border-radius: 5px;">ChangePassword</a>
+						</li>
+						<li class="nav-item d-lg-none">
+							<a class="nav-link d-block text-secondary-emphasis" href="logoutAction"
+								style=" padding: 8px 16px; border-radius: 5px;">LogOut</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href=""
+								style=" padding: 8px 16px; border-radius: 5px;"><span
+									th:text="${userInfo.userName}"></span></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Profile Header -->
+
+	<div class="row border rounded overflow-hidden m-2 h-100" style="background-color: #e3f2fd;">
+
+		<!--<div class="text-center"> <img th:src="@{/img/pf.jpg}" style="width: 200px;"  class="img-fluid rounded-circle mt-4 " alt="Profile Image"><i
+                class="bi bi-camera-fill position-absolute bottom-50 " style="font-size: 2rem;"></i></div>-->
+		<div class="text-center mt-3">
+			<form action="uploadProfileAction" method="post" enctype="multipart/form-data">
+				<img class="rounded-circle"
+					th:src="${userInfo.imageBytesToString} == null ? @{/img/pf.jpg} : 'data:image/*;base64,' + ${userInfo.imageBytesToString}"
+					alt="Profile Image" id="imagePreview" style="width: 250px;height: 250px;object-fit: cover;">
+
+				<input style="display:none;" id="fileChooser" type="file" accept="image/*" name="profileImage"
+					onchange="previewImage(event)"> <br>
+
+				<i class="bi bi-camera-fill" style="font-size: 2rem" onclick="clickFileChooser()"></i> <br> <br>
+
+				<input type="submit" value="Upload" style="display: none;" id="btn-upload">
+
+			</form>
+		</div>
+
+		<h1 th:text="${userInfo.userName}" class="text-center fst-italic ">Pradip kumar paudyal</h1>
+		<div class="d-flex flex-row-reverse m-2 gap-1">
+			<div class="text-end d-block  d-md-none"> <a href="viewProfile"
+					class="p-1  text-decoration-none  pe-2 border border-2 rounded btn btn-outline-secondary ">View
+					profile</a></div>
+			<div class="text-end"> <a href="editProfile"
+					class="p-1 text-decoration-none  pe-2 border border-2 rounded btn btn-outline-secondary">Edit
+					profile</a></div>
+			<div class="text-end"> <a href="/home"
+					class="p-1  text-decoration-none  pe-2 border border-2 rounded btn btn-outline-secondary ">Go
+					Home</a></div>
+		</div>
+	</div>
+
+	<div class="row justify-content-center m-0">
+		<div class="d-none d-md-block col-3 d-flex flex-column p-2  bg-white m-2 accordion accordion-flush border-end	"
+			id="left-column">
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingOne">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+						<i class="bi bi-cake2-fill"> Date of Birth</i>
+					</button>
+				</h2>
+				<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.userBirth}"></p>
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingTwo">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+						<i class="bi bi-briefcase-fill"> WorkPlace</i>
+					</button>
+				</h2>
+				<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.workPlace}"></p>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingThree">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+						<i class="bi bi-briefcase-fill"> Job Careers</i>
+					</button>
+				</h2>
+				<div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.jobCareer}"></p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingFour">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+						<i class="bi bi-heart-fill"> Marital Status</i>
+					</button>
+				</h2>
+				<div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<span th:if="${userInfo.martialStatus ==0}">Single</span>
+						<span th:if="${userInfo.martialStatus ==1}">Married</span>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingFive">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+						<i class="bi bi-house-fill"> Hometown Address</i>
+					</button>
+				</h2>
+				<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.address1}"></p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingSix">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+						<i class="bi bi-geo-alt-fill p-1"> Living Address</i>
+					</button>
+				</h2>
+				<div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.address2}"></p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingSeven">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+						<i class="bi bi-mortarboard-fill"> Education</i>
+					</button>
+				</h2>
+				<div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item" th:if="${userInfo.education1 != null}">
+								<span th:text="${userInfo.education1}"></span>
+							</li>
+							<li class="list-group-item" th:if="${userInfo.education2 != null}">
+								<span th:text="${userInfo.education2}"></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingEight">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+						<span class="material-symbols-outlined">
+							sports_and_outdoors
+						</span> <i> Hobby</i>
+
+					</button>
+				</h2>
+				<div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.hobby1}"></p>
+						<p th:text="${userInfo.hobby2}"></p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingNine">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+						<span class="material-symbols-outlined">
+							lunch_dining
+						</span>
+						<i> Favourite_Food</i>
+					</button>
+				</h2>
+				<div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.favFood}"></p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingTen">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+						<span class="material-symbols-outlined">
+							movie
+						</span><i> Favourite_Movie</i>
+					</button>
+				</h2>
+				<div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.favMovie}"></p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingEleven">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseEleven" aria-expanded="false"
+						aria-controls="flush-collapseEleven">
+						<i class="bi bi-music-note-beamed"> Favourite_Song</i>
+					</button>
+				</h2>
+				<div id="flush-collapseEleven" class="accordion-collapse collapse" aria-labelledby="flush-headingEleven"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.favSong}"></p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingTwelve">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseTwelve" aria-expanded="false"
+						aria-controls="flush-collapseTwelve">
+						<span class="material-symbols-outlined">
+							map
+						</span> <i> Favourite_Place</i>
+					</button>
+				</h2>
+				<div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingTwelve"
+					data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.favPlace}"></p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingThirteen">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#flush-collapseThirteen" aria-expanded="false"
+						aria-controls="flush-collapseThirteen">
+						<span class="material-symbols-outlined">
+							join
+						</span> <i> Joined Since</i>
+					</button>
+				</h2>
+				<div id="flush-collapseThirteen" class="accordion-collapse collapse"
+					aria-labelledby="flush-headingThirteen" data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+						<p th:text="${userInfo.createdDate}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Other Profile Information (Placeholders) -->
+		<div class="col-12 col-md-8 col-lg-6 col-xl-5 d-flex flex-column p-2">
+			<!-- <div class="container mt-3"> -->
+			<!-- <div class="row"> -->
+			<!-- <div class="col-12 col-md-8 col-lg-6 mx-auto"> -->
+
+			<div class="container mt-3">
+				<div class="row">
+					<div class="border border-dark rounded-4 p-4 mb-3">
+						<div class="d-flex align-items-center rounded-pill">
+							<!-- Content -->
+							<div class="me-3">
+								<!--<img th:src="@{/img/pf.jpg}" class="img-fluid rounded-circle border border-dark" width="48px"
+                            alt="Profile Picture">-->
+								<img th:src="${userInfo.imageBytesToString} == null ? @{/img/pf.jpg} : 'data:image/*;base64,' + ${userInfo.imageBytesToString}"
+									class="img-fluid rounded-circle border border-dark"
+									style="width: 48px;height: 48px; object-fit: cover;" alt="Profile Picture">
+							</div>
+							<div class="flex-grow-1">
+								<a href="createpost" id="post-textarea">
+									<strong>What's on your mind?</strong></a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="container mt-2" th:each="p : ${posts}">
+				<div class="row justify-content-center">
+					<!-- Center aligns both blocks -->
+					<!-- <div class="col-12 col-md-8 col-lg-6"> -->
+
+					<div class="border border-dark rounded-4 p-0">
+						<div class="d-flex flex-column">
+							<div class=" p-4 rounded">
+								<!-- Loop Post Content -->
+								<div class=" d-flex gap-2">
+									<div class="post-user-img">
+										<!--<img th:src="@{/img/pf.jpg}" class="img-fluid rounded-circle border border-dark"
+                                            width="48px" alt="...">-->
+										<img th:src="${userInfo.imageBytesToString} == null ? @{/img/pf.jpg} : 'data:image/*;base64,' + ${userInfo.imageBytesToString}"
+											class="img-fluid rounded-circle border border-dark"
+											style="width: 48px;height: 48px; object-fit: cover;" alt="...">
+									</div>
+									<div class="post-user-info flex-fill">
+										<h5 class="m-0"><span th:text="${p.username}"></span> </h5>
+										<small>Posted on <span th:text="${p.createddate}"></span> </small>
+										<span th:if="${p.Viewable==1}"><i class="bi bi-shield-lock"></i></span>
+										<span th:if="${p.Viewable==0}"><i class="bi bi-globe-asia-australia"></i></span>
+									</div>
+									<div class="post-action d-flex align-items-center">
+										<div class=" dropend dropup">
+											<a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+												aria-expanded="false">
+												<i class="bi bi-three-dots-vertical text-secondary"></i>
+											</a>
+
+											<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+												<li>
+													<a class="dropdown-item link-hv"
+														th:href="${'editpostPf?postId=' + p.postId + '&postText=' + p.posttext + '&viewable=' + p.Viewable }">
+														<i class="bi bi-pencil-fill me-2"></i>Edit Post</a>
+												</li>
+												<li>
+													<hr class="dropdown-divider">
+												</li>
+												<li><a class="dropdown-item link-hv"
+														th:href=" 'deletePostActionByPostId?PostId=' +${p.postId} "><i
+															class="bi bi-trash-fill me-2"></i>Delete Post</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div>
+									<p th:text="${p.posttext}">Lorem ipsum dolor sit amet consectetur adipisicing
+										elit. Placeat fugiat, debitis eum voluptas animi sed sit natus ipsum
+										necessitatibus tenetur odio unde obcaecati. Deleniti ab, provident quam
+										libero itaque veniam!</p>
+								</div>
+
+								<!-- Like and Comment Section -->
+								<div style="display: flex; align-items: center;">
+									<div style="margin-right: 20px;">
+										<button type="button"
+											style="background-color: #e3f2fd;  padding: 10px; border: none; border-radius: 5px; font-size: 16px;">
+											<i class="bi bi-heart-fill"></i> Like
+										</button>
+									</div>
+									<div style="margin-right: 20px;">
+										<button type="button"
+											style="background-color: #e3f2fd;  padding: 10px; border: none; border-radius: 5px; font-size: 16px;">
+											<i class="bi bi-chat-fill"></i> Comment
+										</button>
+									</div>
+									<div>
+										<button type="button"
+											style="background-color: #e3f2fd;  padding: 10px; border: none; border-radius: 5px; font-size: 16px;">
+											<i class="bi bi-share-fill"></i> Share
+										</button>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+					<!-- </div> -->
+				</div>
+			</div>
+
+
+
+		</div>
+
+	</div>
+
+	<!-- Modal Box for LogOut Start -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Log out</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Are you sure you want to log out?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light px-5" data-bs-dismiss="modal">NO</button>
+					<a type="button" class="btn btn-danger px-5" href="logoutAction">OK</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Box for LogOut End -->
+
+
+	<!-- Bootstrap JS and Popper.js -->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+
+		function clickFileChooser() {
+			let fileChooser = document.getElementById('fileChooser');
+			fileChooser.click();
+		}
+
+		function previewImage(event) {
+			var reader = new FileReader();
+			reader.onload = function () {
+				var imgElement = document.getElementById('imagePreview');
+				imgElement.src = reader.result;
+				imgElement.style.display = 'inline-block';
+
+				var uploadBtn = document.getElementById('btn-upload');
+				uploadBtn.style.display = 'inline-block';
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	</script>
+
+</body>
+
+</html>

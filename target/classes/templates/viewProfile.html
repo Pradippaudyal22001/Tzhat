@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="apple-touch-icon" sizes="180x180" th:href="@{img/favicon_io/apple-touch-icon.png}">
+	<link rel="icon" type="image/png" sizes="32x32" th:href="@{img/favicon_io/favicon-32x32.png}">
+	<link rel="icon" type="image/png" sizes="16x16" th:href="@{img/favicon_io/favicon-16x16.png}">
+	<link rel="manifest" th:href="@{img/favicon_io/site.webmanifest}">
+	<title>T.Zhat</title>
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container  col-11 col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 m-auto bg-white fs-6 p-4 "
+		th:object="${userInfo}">
+		<div class="wall">
+			<h2 class="text-center">View Profile </h2>
+			<div class="container mt-3">
+				<label for="UserName" class="from-label py-2">User Name</label>
+				<input th:value="*{userName}" type="text" id="UserName" name="UserName" placeholder="-"
+					class="form-control" readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label for="Date-of-Birth" class="from-label py-2">Date Of Birth</label>
+				<input th:value="*{userBirth}" type="text" id="Date-of-Birth" name="Date-of-Birth"
+					placeholder="-" class="form-control" disabled readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label class="from-label py-2">Maritial Status</label>
+				<input th:value="*{martialStatus == 0 ? 'Single' : 'Married'}" type="text" class="form-control" name="Singal" value="Singal"
+					id="Singal" readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label for="work" class="from-label py-2 ">Work Place</label>
+				<input th:value="*{workPlace}" type="text" id="work" name="work" placeholder="-" class="form-control"
+					readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label for="Job" class="from-label py-2">Job career</label>
+				<input th:value="*{jobCareer}" type="text" id="Job" name="Job" placeholder="-" class="form-control"
+					readonly>
+			</div>
+
+
+			<div class="container mt-3">
+				<label for="Address1" class="from-label py-2">Hometown Address</label>
+				<input th:value="*{address1}" type="text" id="Address1" name="Address1"
+					placeholder="-" class="form-control" readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label for="Address2" class="from-label py-2">Living Address</label>
+				<input th:value="*{address2}" type="text" id="Address2" name="Address2"
+					placeholder="-" class="form-control" readonly>
+			</div>
+
+
+			<div class="container mt-3">
+				<label for="Education1" class="from-label py-2">Education 1</label>
+				<input th:value="*{education1}" type="text" id="Education1" name="Education1"
+					placeholder="-" class="form-control" readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label for="Education2" class="from-label py-2">Education 2</label>
+				<input th:value="*{education2}" type="text" id="Education2" name="Education2"
+					placeholder="-" class="form-control" readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label for="Hobby1" class="from-label py-2">Hobby 1</label>
+				<input th:value="*{hobby1}" type="text" id="Hobby1" name="Hobby1" placeholder="-"
+					class="form-control" readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label for="Hobby2" class="from-label py-2">Hobby 2</label>
+				<input th:value="*{hobby2}" type="text" id="Hobby2" name="Hobby2" placeholder="-"
+					class="form-control" readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label for="Food" class="from-label py-2">Favourite Food</label>
+				<input th:value="*{favFood}" type="text" id="Food" name="Food" placeholder="-"
+					class="form-control" readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label for="Movies" class="from-label py-2">Favourite Movies</label>
+				<input th:value="*{favMovie}" type="text" id="Movies" name="Movies" placeholder="-"
+					class="form-control" readonly>
+			</div>
+
+			<div class="container mt-3">
+				<label for="Song" class="from-label py-2">Favourite Song</label>
+				<input th:value="*{favSong}" type="text" id="Song" name="Song" placeholder="-"
+					class="form-control" readonly>
+			</div>
+
+			<div class="container mt-3 pb-4">
+				<label for="Place" class="from-label py-2">Favourite Place</label>
+				<input th:value="*{favPlace}" type="text" id="Place" name="Place" placeholder="-"
+					class="form-control" readonly>
+			</div>
+			<div class="container mt-3 py-2">
+				<a href="editProfile" class="btn btn-primary form-control">Edit Profile</a>
+			</div>
+		</div>
+
+	</div>
+	</div>
+</body>
+
+</html>

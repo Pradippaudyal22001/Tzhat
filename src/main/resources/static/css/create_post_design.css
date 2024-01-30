@@ -1,0 +1,120 @@
+body {
+    display: flex;
+    margin: 0;
+    background-color: lightgrey;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.post-container {
+    z-index: 1;
+    border: 1px solid grey;
+    display: block;
+    position: absolute;
+    left: 31%;
+    top: 24%;
+    border-radius: 20px;
+    border: none;
+    background-color: white;
+
+    width: 440px;
+}
+
+.post-container-radio {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.post-container-radio h3 {
+    margin-bottom: 10px;
+}
+
+.textarea-wrapper {
+    width: 280px;
+    height: 100px;
+    font-size: 65px;
+    background-color: transparent;
+    color: inherit;
+    min-width: 30px;
+    overflow: hidden;
+    resize: none;
+}
+
+.text-area {
+    font-family: inherit;
+    font-size: 13px;
+    width: 300px;
+    height: 100px;
+    padding: 0;
+    
+    position: absolute;
+    left: 16%;
+    border-radius: 10px;
+    resize: none;
+}
+
+.text-area:focus {
+    outline: none;
+}
+ 
+.post-content {
+    margin: 0 auto;
+    display: block;
+    justify-content: center;
+
+    width: 300px;
+    flex-direction: column;
+}
+
+#post_button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+
+    width: 305px;
+    background-color:red;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+}
+
+#post_button:hover {
+    cursor: pointer;
+    background-color: darkred;
+}
+
+.post-content h1 {
+    text-align: center;
+    display: block;
+}
+
+.nav {
+    width: 100%;
+    height:110px;
+    z-index: -1;
+    background-color: red;
+    padding: 0;
+
+    display: block;
+}
+
+.bottom-nav {
+    width: 100%;
+    height:60px;
+    background-color: blue;
+    position: absolute;
+    bottom: 0;
+    background-color: red;
+}
+
+.logo {
+    display: fixed;
+    margin-top: -22px;
+}
+
+.logo  img{
+    width: 150px;
+    border-radius: 10px;
+    display: block;
+    position: fixed;
+}

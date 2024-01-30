@@ -1,0 +1,58 @@
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-item .nav-link {
+      padding: 8px 16px; /* Padding */
+      border-radius: 5px; /* Rounded corners */
+      display: block;
+      margin-bottom: 6px; /* Adjust the spacing between items */
+  }
+
+  .navbar-nav .nav-item .nav-link:hover {
+      background-color: #b0aeae; /* Hover background color */
+  }
+}
+
+.link-hv:hover{
+  background-color:#e7e5e5 !important;
+}
+
+.dropdown-toggle::before {
+  display: none !important;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+.bi-gear {
+  color: rgb(148, 142, 142);
+  font-size: larger;
+  font-weight: bold;
+}
+
+.bi-three-dots{
+  color: #888;
+  font-size: larger;
+  font-weight: bold;
+}
+
+#post-textarea {
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  border: 1px solid black;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 20px;
+  color: #242020;
+  font-family: "Segoe UI Historic";
+}
+
+#post-textarea:hover {
+  background-color: #bfb5b5;
+}

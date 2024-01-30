@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, #8e9eab, #eef2f3);
+}
+
+form {
+    width: 30%;
+    background-color: white;
+    padding: 40px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.container-fluid #signup {
+    background-color: #069c26;
+    display: block;
+    color: #fff;
+}
+
+.container-fluid #signup:hover {
+    background-color: #14c139;
+    display: block;
+    color: #fff;
+}
